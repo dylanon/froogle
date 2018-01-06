@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import AddTransaction from './components/addTransaction';
 
 class App extends React.Component {
     render() {
       return (
-        <div>
-          Hello world!
+        <div className="app-wrapper">
+          <AddTransaction />
         </div>
       )
     }

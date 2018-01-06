@@ -2,3 +2,16 @@ body {
     background: black;
     color: white;
 }
+
+#app,
+.app-wrapper {
+    min-height: 100vh;
+}
+
+.app-wrapper {
+    display: flex;
+}
+
+.add-transaction__form {
+    margin: auto;
+}
