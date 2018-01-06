@@ -1,17 +1,7 @@
-body {
-    background: black;
-    color: white;
-}
+// Variables
 
-#app,
-.app-wrapper {
-    min-height: 100vh;
-}
+// Import partials
 
-.app-wrapper {
-    display: flex;
-}
-
-.add-transaction__form {
-    margin: auto;
-}
+@import 'partials/setup';
+@import 'partials/global';
+@import 'partials/addTransaction';
