@@ -10,23 +10,25 @@ Enter transactions easily in a single text field, and see your progress as time 
 
 ## Basic functionality
 
-- Create spending categories or income categories
-  - Monthly target for each
-- Create a monthly budget from categories and their targets
-  - Can change categories and targets at any time
 - Input a transaction via a simple string
   - Auto-recognize transaction data:
+    - Date
     - Amount
     - Description
     - Category
-- Show progress by category
-- Show progress by month
+- List the transactions in reverse chronological order
+- Display the total amount spent
+- Allow editing of transactions
 
 ## Enhancements
 
+- Optionally accept a target amount for each category
+  - Show progress towards target by category
+- Create a monthly budget from all categories and their targets
+  - Show progress towards monthly budget
 - Preserve a full history by month
-- Every new month, categories and targets from last month are preserved and actual spending/income resets to 0
-- View and edit past months
+  - Every new month, categories and targets from last month are preserved and actual spending/income resets to 0
+  - View and edit past months
 - Do math while entering transactions
 - Track money owed to or from others
   - Log while entering a transaction (e.g. Split dinner with a friend - I spent 1/2 on #restaurants and they owe me the other half)
