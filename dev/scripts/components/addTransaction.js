@@ -6,7 +6,8 @@ export default class AddTransaction extends React.Component {
         super(props);
         this.state = {
             userString: '',
-            detectedDate: ''
+            detectedDate: '',
+            detectedAmount: ''
         }
         this.handleChange = this.handleChange.bind(this);
         this.detectDate = this.detectDate.bind(this);
@@ -28,7 +29,7 @@ export default class AddTransaction extends React.Component {
         // Loop through months, match strings like 'Dec 31' and 'jan   1'
         const matches = [];
         months.forEach(month => {
-            const reString = `(?:^|\\s)(${month})\\s*(\\d{1,2})(?:\\s|$)`;
+            const reString = `(?:^|\\s)(${month})\\s*(\\d{1,2})(?=\\s|$)`;
             const re = new RegExp(reString, 'i');
             if (transactionString.match(re)) {
                 matches.push(transactionString.match(re));
@@ -85,8 +86,34 @@ export default class AddTransaction extends React.Component {
     }
 
     detectAmount(transactionString) {
-        console.log('Checking for dollar amount in:', transactionString);
-        
+        const pattern = /(?:\$)?(\d*\.?\d+)(?=\s|$)/;
+        const re = new RegExp(pattern, 'i');
+        const match = transactionString.match(re);
+        // Store amount in state
+        if (match) {
+            // The first capture group contains a string like '209.0394'
+            const amount = Number(match[1]).toFixed(2);
+            this.setState({
+                detectedAmount: amount
+            });
+        } else {
+            this.setState({
+                detectedAmount: ''
+            });
+        }
+        // Update the string to match and pass on for category detection
+        let newTransactionString = transactionString;
+        if (match) {
+            const matchIndex = match.index;
+            const matchText = match[0];
+            const matchInput = match.input;
+            newTransactionString = matchInput.slice(0, matchIndex) + matchInput.slice(matchIndex + matchText.length);
+        }
+        this.detectCategory(newTransactionString);
+    }
+
+    detectCategory(transactionString) {
+        console.log('Detecting the category from:', transactionString);
     }
 
     render() {
@@ -99,6 +126,7 @@ export default class AddTransaction extends React.Component {
                 </form>
                 <p>User entered: {this.state.userString}</p>
                 <p>Detected date: {moment(this.state.detectedDate, 'YYYY-MM-DD').format('MMMM D, YYYY')}</p>
+                <p>Detected amount: ${this.state.detectedAmount}</p>
             </div>
         )
     }
