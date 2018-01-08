@@ -8,10 +8,13 @@ export default class AddTransaction extends React.Component {
             userString: '',
             detectedDate: '',
             detectedAmount: '',
-            detectedCategory: ''
+            detectedCategory: '',
+            detectedDescription: ''
         }
         this.handleChange = this.handleChange.bind(this);
         this.detectDate = this.detectDate.bind(this);
+        this.detectCategory = this.detectCategory.bind(this);
+        this.detectDescription = this.detectDescription.bind(this);
     }
 
     handleChange(e) {
@@ -130,6 +133,22 @@ export default class AddTransaction extends React.Component {
                 detectedCategory: ''
             });
         }
+        // Update the string to match and pass on for category detection
+        let newTransactionString = transactionString;
+        if (match) {
+            const matchIndex = match.index;
+            const matchText = match[0];
+            const matchInput = match.input;
+            newTransactionString = matchInput.slice(0, matchIndex) + matchInput.slice(matchIndex + matchText.length);
+        }
+        this.detectDescription(newTransactionString);
+    }
+
+    detectDescription(transactionString) {
+        // Remove whitespace from ends and store in state
+        this.setState({
+            detectedDescription: transactionString.trim()
+        });
     }
 
     render() {
@@ -144,6 +163,7 @@ export default class AddTransaction extends React.Component {
                 <p>Detected date: {moment(this.state.detectedDate, 'YYYY-MM-DD').format('MMMM D, YYYY')}</p>
                 <p>Detected amount: ${this.state.detectedAmount}</p>
                 <p>Detected category: #{this.state.detectedCategory}</p>
+                <p>Detected description: {this.state.detectedDescription}</p>
             </div>
         )
     }
