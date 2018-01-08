@@ -43,7 +43,11 @@ export default class AddTransaction extends React.Component {
     detectDate(transactionString) {
         // Store list of months (3 characters each)
         const months = moment.monthsShort();
+
         // Loop through months, match strings like 'Dec 31' and 'jan   1'
+        // *** Problem here:
+        // *** Only allows one matched date per month
+        // *** If 'jan 17' and 'jan 28' are entered, only one of them is stored in the array
         const matches = [];
         months.forEach(month => {
             const reString = `(?:^|\\s)(${month})\\s*(\\d{1,2})(?=\\s|$)`;
@@ -52,17 +56,19 @@ export default class AddTransaction extends React.Component {
                 matches.push(transactionString.match(re));
             }
         });
-        // Store the transaction string to be passed on for further processing
-        let newTransactionString = transactionString;
-        // If there are matches, pick the first one that is a valid date
+        
+        // Initialize some variables to store the validated match
+        let firstValidMatch;
+        let firstValidDate;
+
+        // If there are matches, find the first one that validates
         if (matches.length > 0) {
             // Sort by index to order how they were actually entered
             matches.sort((a, b) => {
                 return a.index - b.index;
             });
+            
             // Loop through the matches until we find the first valid date
-            let firstValidMatch;
-            let firstValidDate;
             for (let i = 0; i < matches.length; i++) {
                 // First regex capture group is the month (e.g. 'jan')
                 const month = matches[i][1];
@@ -75,29 +81,21 @@ export default class AddTransaction extends React.Component {
                     break;
                 }
             }
-            // Remove the matched text from the string we'll be passing on
-            if (firstValidMatch) {
-                const matchIndex = firstValidMatch.index;
-                const matchText = firstValidMatch[0];
-                const matchInput = firstValidMatch.input;
-                newTransactionString = matchInput.slice(0, matchIndex) + matchInput.slice(matchIndex + matchText.length);
-            }
-            // Store matched date in state
-            if (firstValidDate) {
-                this.setState({
-                    detectedDate: firstValidDate
-                });
-            } else {
-                this.setState({
-                    detectedDate: ''
-                })
-            }
+        }
+
+        // Store matched date in state
+        if (firstValidDate) {
+            this.setState({
+                detectedDate: firstValidDate
+            });
         } else {
-            // Reset state if there was a match, but there is no longer one
             this.setState({
                 detectedDate: ''
-            });
+            })
         }
+
+        // Remove the matched text from the string we'll be passing on
+        const newTransactionString = this.createNextTransactionString(transactionString, firstValidMatch);
         // Pass on the string to look for a dollar value
         this.detectAmount(newTransactionString);
     }
