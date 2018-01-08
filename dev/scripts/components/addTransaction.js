@@ -7,7 +7,8 @@ export default class AddTransaction extends React.Component {
         this.state = {
             userString: '',
             detectedDate: '',
-            detectedAmount: ''
+            detectedAmount: '',
+            detectedCategory: ''
         }
         this.handleChange = this.handleChange.bind(this);
         this.detectDate = this.detectDate.bind(this);
@@ -114,6 +115,21 @@ export default class AddTransaction extends React.Component {
 
     detectCategory(transactionString) {
         console.log('Detecting the category from:', transactionString);
+        const pattern = /#([a-z]+)(?=\s|$)/;
+        const re = new RegExp(pattern, 'i');
+        const match = transactionString.match(re);
+        // Store category in state
+        if (match) {
+            // The first capture group contains the category name
+            const category = match[1];
+            this.setState({
+                detectedCategory: category
+            });
+        } else {
+            this.setState({
+                detectedCategory: ''
+            });
+        }
     }
 
     render() {
@@ -127,6 +143,7 @@ export default class AddTransaction extends React.Component {
                 <p>User entered: {this.state.userString}</p>
                 <p>Detected date: {moment(this.state.detectedDate, 'YYYY-MM-DD').format('MMMM D, YYYY')}</p>
                 <p>Detected amount: ${this.state.detectedAmount}</p>
+                <p>Detected category: #{this.state.detectedCategory}</p>
             </div>
         )
     }
