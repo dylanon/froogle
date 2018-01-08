@@ -27,6 +27,19 @@ export default class AddTransaction extends React.Component {
         this.detectDate(userString);
     }
 
+    createNextTransactionString(currentString, currentMatch) {
+        // Returns a new string after a regex match - matched text is removed
+        // If no match, returns the string unmodified
+        let nextString = currentString;
+        if (currentMatch) {
+            const matchIndex = currentMatch.index;
+            const matchText = currentMatch[0];
+            const matchInput = currentMatch.input;
+            nextString = matchInput.slice(0, matchIndex) + matchInput.slice(matchIndex + matchText.length);
+        }
+        return nextString;
+    }
+
     detectDate(transactionString) {
         // Store list of months (3 characters each)
         const months = moment.monthsShort();
@@ -106,18 +119,11 @@ export default class AddTransaction extends React.Component {
             });
         }
         // Update the string to match and pass on for category detection
-        let newTransactionString = transactionString;
-        if (match) {
-            const matchIndex = match.index;
-            const matchText = match[0];
-            const matchInput = match.input;
-            newTransactionString = matchInput.slice(0, matchIndex) + matchInput.slice(matchIndex + matchText.length);
-        }
+        const newTransactionString = this.createNextTransactionString(transactionString, match);
         this.detectCategory(newTransactionString);
     }
 
     detectCategory(transactionString) {
-        console.log('Detecting the category from:', transactionString);
         const pattern = /#([a-z]+)(?=\s|$)/;
         const re = new RegExp(pattern, 'i');
         const match = transactionString.match(re);
@@ -134,13 +140,7 @@ export default class AddTransaction extends React.Component {
             });
         }
         // Update the string to match and pass on for category detection
-        let newTransactionString = transactionString;
-        if (match) {
-            const matchIndex = match.index;
-            const matchText = match[0];
-            const matchInput = match.input;
-            newTransactionString = matchInput.slice(0, matchIndex) + matchInput.slice(matchIndex + matchText.length);
-        }
+        const newTransactionString = this.createNextTransactionString(transactionString, match);
         this.detectDescription(newTransactionString);
     }
 
