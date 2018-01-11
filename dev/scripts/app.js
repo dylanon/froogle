@@ -1,8 +1,34 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import firebase from './firebase';
 import AddTransaction from './components/addTransaction';
 
 class App extends React.Component {
+    componentDidMount() {
+      // Check if the user is signed in and listen for changes to authorization
+      firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+          console.log('User is signed in!')
+        } else {
+          console.log('Not signed in.')
+          this.signInAnonymously();
+        }
+      });
+    }
+
+  signInAnonymously() {
+    firebase.auth().signInAnonymously()
+      .then(res => {
+        console.log('Signing in anonymously.')
+        console.log(res);
+      })
+      .catch(error => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(`Error! Code ${errorCode}: ${errorMessage}`);
+      });
+  }
+
     render() {
       return (
         <div className="app-wrapper">
