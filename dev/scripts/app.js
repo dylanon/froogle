@@ -4,13 +4,25 @@ import firebase from './firebase';
 import AddTransaction from './components/addTransaction';
 
 class App extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        uid: ''
+      }
+    }
+
     componentDidMount() {
       // Check if the user is signed in and listen for changes to authorization
       firebase.auth().onAuthStateChanged(user => {
         if (user) {
-          console.log('User is signed in!')
+          console.log('User is signed in!');
+          console.log(user);
+          // Store user id in state
+          this.setState({
+            uid: user.uid
+          });
         } else {
-          console.log('Not signed in.')
+          console.log('Not signed in.');
           this.signInAnonymously();
         }
       });
@@ -32,7 +44,7 @@ class App extends React.Component {
     render() {
       return (
         <div className="app-wrapper">
-          <AddTransaction />
+          <AddTransaction uid={this.state.uid} />
         </div>
       )
     }
@@ -47,9 +59,6 @@ ReactDOM.render(<App />, document.getElementById('app'));
 //    2) a dollar amount (default is $0)
 //    3) a category (default is #general)
 //    4) a description (default is 'A froogle transaction')
-// - Check if the category exists
-//   - If yes, do nothing
-//   - If no, create a new category in the database
 // - Store the transaction in the database
 // - Retrieve all transactions for this month and display
 // - Allow editing and deletion of transactions

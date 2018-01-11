@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import firebase from '../firebase';
 
 export default class AddTransaction extends React.Component {
     constructor(props) {
@@ -15,6 +16,8 @@ export default class AddTransaction extends React.Component {
         this.detectDate = this.detectDate.bind(this);
         this.detectCategory = this.detectCategory.bind(this);
         this.detectDescription = this.detectDescription.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.clearForm = this.clearForm.bind(this);
     }
 
     handleChange(e) {
@@ -25,6 +28,33 @@ export default class AddTransaction extends React.Component {
         });
         // Start processing the string
         this.detectDate(userString);
+    }
+
+    handleSubmit(e) {
+        e.preventDefault();
+        const detectedMoment = moment(this.state.detectedDate, 'YYYY-MM-DD');
+        const year = detectedMoment.format('YYYY');
+        const month = detectedMoment.format('MM');
+        const dbRef = firebase.database().ref(`users/${this.props.uid}/transactions/${year}/${month}`);
+        const transaction = {
+            date: this.state.detectedDate,
+            amount: this.state.detectedAmount,
+            category: this.state.detectedCategory,
+            description: this.state.detectedDescription
+        };
+        dbRef.push(transaction);
+        // Clear the user input (and any details stored in state)
+        this.clearForm();
+    }
+
+    clearForm() {
+        this.setState({
+            userString: '',
+            detectedDate: '',
+            detectedAmount: '',
+            detectedCategory: '',
+            detectedDescription: ''
+        });
     }
 
     createNextTransactionString(currentString, currentMatch) {
@@ -184,7 +214,7 @@ export default class AddTransaction extends React.Component {
     render() {
         return (
             <div className="add-transaction">
-                <form className="add-transaction__form">
+                <form className="add-transaction__form" onSubmit={this.handleSubmit}>
                     <label htmlFor="add-transaction__input">Add Transaction</label>
                     <input type="text" id="add-transaction__input" onChange={this.handleChange} value={this.state.userString} />
                     <input type="submit" value="Add"/>
