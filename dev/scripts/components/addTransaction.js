@@ -89,8 +89,9 @@ export default class AddTransaction extends React.Component {
                 detectedDate: firstValidDate
             });
         } else {
+            // Default to today's date
             this.setState({
-                detectedDate: ''
+                detectedDate: moment().format('YYYY-MM-DD')
             })
         }
 
@@ -112,8 +113,9 @@ export default class AddTransaction extends React.Component {
                 detectedAmount: amount
             });
         } else {
+            // Default to 0
             this.setState({
-                detectedAmount: ''
+                detectedAmount: '0'
             });
         }
         // Update the string to match and pass on for category detection
@@ -134,7 +136,7 @@ export default class AddTransaction extends React.Component {
             });
         } else {
             this.setState({
-                detectedCategory: ''
+                detectedCategory: 'general'
             });
         }
         // Update the string to match and pass on for category detection
@@ -143,10 +145,19 @@ export default class AddTransaction extends React.Component {
     }
 
     detectDescription(transactionString) {
-        // Remove whitespace from ends and store in state
-        this.setState({
-            detectedDescription: transactionString.trim()
-        });
+        // Remove whitespace from ends
+        const description = transactionString.trim();
+        if (description.length > 0) {
+            // Store in state
+            this.setState({
+                detectedDescription: description
+            });
+        } else {
+            // Set a default value
+            this.setState({
+                detectedDescription: 'A froogle transaction'
+            });
+        }
     }
 
     render() {
