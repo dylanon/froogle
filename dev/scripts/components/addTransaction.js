@@ -40,20 +40,33 @@ export default class AddTransaction extends React.Component {
         return nextString;
     }
 
+    removeSubstrings(currentString, arrayOfSubstrings) {
+        let workingString = currentString;
+        arrayOfSubstrings.forEach(substring => {
+            const rePattern = new RegExp(substring, 'i');
+            workingString = workingString.replace(rePattern, '');
+        });
+        return workingString; 
+    }
+
     detectDate(transactionString) {
         // Store list of months (3 characters each)
         const months = moment.monthsShort();
 
         // Loop through months, match strings like 'Dec 31' and 'jan   1'
-        // *** Problem here:
-        // *** Only allows one matched date per month
-        // *** If 'jan 17' and 'jan 28' are entered, only one of them is stored in the array
         const matches = [];
         months.forEach(month => {
             const reString = `(?:^|\\s)(${month})\\s*(\\d{1,2})(?=\\s|$)`;
-            const re = new RegExp(reString, 'i');
-            if (transactionString.match(re)) {
-                matches.push(transactionString.match(re));
+            const re = new RegExp(reString, 'gi');
+            // Look for a match (first time for this month)
+            let matchedDate = re.exec(transactionString);
+            // Since our regex pattern has the 'g' flag, we can call RegExp.prototype.exec() multiple times
+            // Each time, it searched from the end of the last match, then update lastIndex on our RegExp object
+            while (matchedDate != null) {
+                // Store the match
+                matches.push(matchedDate);
+                // Run the search again
+                matchedDate = re.exec(transactionString);
             }
         });
         
@@ -95,8 +108,16 @@ export default class AddTransaction extends React.Component {
             })
         }
 
-        // Remove the matched text from the string we'll be passing on
-        const newTransactionString = this.createNextTransactionString(transactionString, firstValidMatch);
+        // Collect the matched substrings we need to remove before passing the string on for processing
+        const matchSubstrings = [];
+        for (let i = 0; i < matches.length; i ++) {
+            const substring = matches[i][0];
+            matchSubstrings.push(substring);
+        }
+
+        // Remove all dates from the string we'll be passing on
+        const newTransactionString = this.removeSubstrings(transactionString, matchSubstrings);
+
         // Pass on the string to look for a dollar value
         this.detectAmount(newTransactionString);
     }
