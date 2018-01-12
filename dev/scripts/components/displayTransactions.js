@@ -3,7 +3,18 @@ import moment from 'moment';
 
 export default class DisplayTransactions extends React.Component {
     render() {
-        const transactionsArray = this.props.transactions;
+        // Sort transactions reverse chronologically
+        const transactionsArray = Array.from(this.props.transactions);
+        transactionsArray.sort((a , b) => {
+            const momentA = moment(a.date, 'YYYY-MM-DD');
+            const momentB = moment(b.date, 'YYYY-MM-DD');
+            if (momentB.isBefore(momentA, 'day')) {
+                return -1;
+            } else {
+                return 1;
+            }
+        });
+        
         return (
             <div className="display-transactions">
                 <h2>Transactions</h2>
