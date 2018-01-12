@@ -1,5 +1,34 @@
 /* Display Transactions */
 
-.transactions-list {
+.display-transactions {
+    width: 80%;
     margin: auto;
+
+    &__list {
+        padding: 0;
+        list-style-type: none;
+    }
+
+    &__item {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+    }
+
+    &__item-date {
+        width: 15%
+    }
+
+    &__item-description {
+        width: 35%;
+    }
+    
+    &__item-amount {
+        width: 25%;
+    }
+
+    &__item-category {
+        width: 25%;
+    }
+
 }
