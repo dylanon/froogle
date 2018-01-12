@@ -76,7 +76,7 @@ class App extends React.Component {
       return (
         <React.Fragment>
           <TotalSpent transactions={this.state.transactions} />
-          <DisplayTransactions transactions={this.state.transactions} />
+          <DisplayTransactions transactions={this.state.transactions} uid={this.state.uid} />
           <AddTransaction uid={this.state.uid} />
         </React.Fragment>
       )

@@ -1,7 +1,26 @@
 import React from 'react';
 import moment from 'moment';
+import firebase from '../firebase';
 
 export default class DisplayTransactions extends React.Component {
+    handleDelete(e, transaction) {
+        e.preventDefault();
+        // Build database reference
+        const uid = this.props.uid;
+        const key = transaction.key;
+        const transactionMoment = moment(transaction.date, 'YYYY-MM-DD');
+        const year = transactionMoment.format('YYYY');
+        const month = transactionMoment.format('MM');
+        const dbRef = firebase.database().ref(`users/${uid}/transactions/${year}/${month}/${key}`);
+        // Delete the transaction
+        dbRef.remove()
+        .catch(error => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(`Error! Code ${errorCode}: ${errorMessage}`);
+        });
+    }
+
     render() {
         // Sort transactions reverse chronologically
         const transactionsArray = Array.from(this.props.transactions);
@@ -26,6 +45,9 @@ export default class DisplayTransactions extends React.Component {
                                 <div className="display-transactions__item-description">{transaction.description}</div>
                                 <div className="display-transactions__item-amount">{transaction.amount}</div>
                                 <div className="display-transactions__item-category">#{transaction.category}</div>
+                                <div className="display-transactions__item-delete">
+                                    <a href="#" onClick={(e) => this.handleDelete(e, transaction)}>Delete</a>
+                                </div>
                             </li>
                         )
                     })}
