@@ -3,11 +3,7 @@ body {
     color: white;
 }
 
-#app,
-.app-wrapper {
+#app {
     min-height: 100vh;
-}
-
-.app-wrapper {
     display: flex;
 }

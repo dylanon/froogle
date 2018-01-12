@@ -43,9 +43,9 @@ class App extends React.Component {
 
     render() {
       return (
-        <div className="app-wrapper">
+        <React.Fragment>
           <AddTransaction uid={this.state.uid} />
-        </div>
+        </React.Fragment>
       )
     }
 }
