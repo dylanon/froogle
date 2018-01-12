@@ -1,14 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import firebase from './firebase';
+import moment from 'moment';
 import AddTransaction from './components/addTransaction';
+import DisplayTransactions from './components/displayTransactions';
 
 class App extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        uid: ''
+        uid: '',
+        transactions: []
       }
+      this.listenForData = this.listenForData.bind(this);
     }
 
     componentDidMount() {
@@ -21,6 +25,8 @@ class App extends React.Component {
           this.setState({
             uid: user.uid
           });
+          // Download data and listen for changes
+          this.listenForData();
         } else {
           console.log('Not signed in.');
           this.signInAnonymously();
@@ -28,22 +34,47 @@ class App extends React.Component {
       });
     }
 
-  signInAnonymously() {
-    firebase.auth().signInAnonymously()
-      .then(res => {
-        console.log('Signing in anonymously.')
-        console.log(res);
-      })
-      .catch(error => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(`Error! Code ${errorCode}: ${errorMessage}`);
+    signInAnonymously() {
+      firebase.auth().signInAnonymously()
+        .then(res => {
+          console.log('Signing in anonymously.')
+          console.log(res);
+        })
+        .catch(error => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(`Error! Code ${errorCode}: ${errorMessage}`);
+        });
+    }
+    
+    listenForData() {
+      // Create the database reference
+      const today = moment();
+      const year = today.format('YYYY');
+      const month = today.format('MM');
+      const dbRef = firebase.database().ref(`users/${this.state.uid}/transactions/${year}/${month}`);
+      // Download the current month's transactions, and listen for changes and new transactions
+      dbRef.on('value', snapshot => {
+        const rawTransactions = snapshot.val();
+        // Store each transaction's unique database key on the transaction object
+        const transactions = [];
+        for (let transaction in rawTransactions) {
+          const transactionObject = Object.assign({}, rawTransactions[transaction]);
+          transactionObject.key = transaction;
+          // Store the transaction object in the array
+          transactions.push(transactionObject);
+        };
+        // Store the transactions array in state
+        this.setState({
+          transactions
+        });
       });
-  }
+    }
 
     render() {
       return (
         <React.Fragment>
+          <DisplayTransactions />
           <AddTransaction uid={this.state.uid} />
         </React.Fragment>
       )
