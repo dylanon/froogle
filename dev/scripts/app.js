@@ -4,6 +4,7 @@ import firebase from './firebase';
 import moment from 'moment';
 import AddTransaction from './components/addTransaction';
 import DisplayTransactions from './components/displayTransactions';
+import TotalSpent from './components/totalSpent';
 
 class App extends React.Component {
     constructor(props) {
@@ -74,6 +75,7 @@ class App extends React.Component {
     render() {
       return (
         <React.Fragment>
+          <TotalSpent transactions={this.state.transactions} />
           <DisplayTransactions transactions={this.state.transactions} />
           <AddTransaction uid={this.state.uid} />
         </React.Fragment>
