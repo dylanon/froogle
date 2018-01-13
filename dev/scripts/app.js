@@ -13,9 +13,11 @@ class App extends React.Component {
       this.state = {
         uid: '',
         transactions: [],
-        categories: []
+        categories: [],
+        filterCategory: ''
       }
       this.listenForData = this.listenForData.bind(this);
+      this.filterTransactionsByCategory = this.filterTransactionsByCategory.bind(this);
     }
 
     componentDidMount() {
@@ -86,12 +88,19 @@ class App extends React.Component {
       });
     }
 
+    filterTransactionsByCategory(e, categoryName) {
+      e.preventDefault();
+      this.setState({
+        filterCategory: categoryName
+      });
+    }
+
     render() {
       return (
         <React.Fragment>
           <TotalSpent transactions={this.state.transactions} />
-          <Categories categories={this.state.categories} />
-          <DisplayTransactions transactions={this.state.transactions} uid={this.state.uid} />
+          <Categories categories={this.state.categories} filterTransactionsByCategory={this.filterTransactionsByCategory} />
+          <DisplayTransactions transactions={this.state.transactions} uid={this.state.uid} filterCategory={this.state.filterCategory} />
           <AddTransaction uid={this.state.uid} categories={this.state.categories} />
         </React.Fragment>
       )

@@ -6,13 +6,13 @@ export default class Categories extends React.Component {
         return (
             <ul>
                 <li>
-                    <a href="#">View all</a>
+                    <a href="#" onClick={(e) => this.props.filterTransactionsByCategory(e, '')}>View all</a>
                 </li>
                 {categoriesArray.map(category => {
                     return (
                         <li key={category.key}>
                             <div>
-                                <a href="#">#{category.category}</a>
+                                <a href="#" onClick={(e) => this.props.filterTransactionsByCategory(e, category.category)}>#{category.category}</a>
                             </div>
                             <div>
                                 <a href="#">Set budget</a>
