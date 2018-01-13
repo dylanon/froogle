@@ -10,18 +10,18 @@ Enter transactions easily in a single text field, and see your progress as time 
 
 ## Basic functionality
 
-- Input a transaction via a simple string
+- **Done**: Input a transaction via a simple string
   - Auto-recognize transaction data:
     - Date
     - Amount
     - Description
     - Category
-- List the transactions in reverse chronological order
-- Display the total amount spent
-- Allow editing of transactions
+- **Done**: List the transactions in reverse chronological order
+- **Done**: Display the total amount spent
 
 ## Enhancements
 
+- Allow editing of transactions
 - Optionally accept a target amount for each category
   - Show progress towards target by category
 - Create a monthly budget from all categories and their targets
