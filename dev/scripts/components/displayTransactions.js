@@ -11,7 +11,7 @@ export default class DisplayTransactions extends React.Component {
         const transactionMoment = moment(transaction.date, 'YYYY-MM-DD');
         const year = transactionMoment.format('YYYY');
         const month = transactionMoment.format('MM');
-        const dbRef = firebase.database().ref(`users/${uid}/transactions/${year}/${month}/${key}`);
+        const dbRef = firebase.database().ref(`users/${uid}/${year}/${month}/transactions/${key}`);
         // Delete the transaction
         dbRef.remove()
         .catch(error => {

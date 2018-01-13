@@ -35,14 +35,27 @@ export default class AddTransaction extends React.Component {
         const detectedMoment = moment(this.state.detectedDate, 'YYYY-MM-DD');
         const year = detectedMoment.format('YYYY');
         const month = detectedMoment.format('MM');
-        const dbRef = firebase.database().ref(`users/${this.props.uid}/transactions/${year}/${month}`);
+        const transactionsRef = firebase.database().ref(`users/${this.props.uid}/${year}/${month}/transactions`);
         const transaction = {
             date: this.state.detectedDate,
             amount: this.state.detectedAmount,
             category: this.state.detectedCategory,
             description: this.state.detectedDescription
         };
-        dbRef.push(transaction);
+        transactionsRef.push(transaction);
+        // If this is a new category, store in database
+        const budgetsArray = Array.from(this.props.budgets);
+        const duplicateCategories = budgetsArray.filter(budget => {
+            return budget.category === this.state.detectedCategory;
+        });
+        if (duplicateCategories.length === 0) {
+            const budgetsRef = firebase.database().ref(`users/${this.props.uid}/${year}/${month}/budgets`);
+            budgetsRef.push({
+                category: this.state.detectedCategory
+            });
+        } else {
+            console.log('Category already exists in the database.');
+        }
         // Clear the user input (and any details stored in state)
         this.clearForm();
     }

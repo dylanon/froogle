@@ -11,7 +11,8 @@ class App extends React.Component {
       super(props);
       this.state = {
         uid: '',
-        transactions: []
+        transactions: [],
+        budgets: []
       }
       this.listenForData = this.listenForData.bind(this);
     }
@@ -53,10 +54,11 @@ class App extends React.Component {
       const today = moment();
       const year = today.format('YYYY');
       const month = today.format('MM');
-      const dbRef = firebase.database().ref(`users/${this.state.uid}/transactions/${year}/${month}`);
+      const dbRef = firebase.database().ref(`users/${this.state.uid}/${year}/${month}`);
       // Download the current month's transactions, and listen for changes and new transactions
       dbRef.on('value', snapshot => {
-        const rawTransactions = snapshot.val();
+        // Store the raw transactions
+        const rawTransactions = snapshot.val().transactions;
         // Store each transaction's unique database key on the transaction object
         const transactions = [];
         for (let transaction in rawTransactions) {
@@ -65,9 +67,20 @@ class App extends React.Component {
           // Store the transaction object in the array
           transactions.push(transactionObject);
         };
+        // Store the raw budgets (same code used to store transactions above)
+        const rawBudgets = snapshot.val().budgets;
+        // Store each transaction's unique database key on the transaction object
+        const budgets = [];
+        for (let budget in rawBudgets) {
+          const budgetObject = Object.assign({}, rawBudgets[budget]);
+          budgetObject.key = budget;
+          // Store the transaction object in the array
+          budgets.push(budgetObject);
+        };
         // Store the transactions array in state
         this.setState({
-          transactions
+          transactions,
+          budgets
         });
       });
     }
@@ -77,7 +90,7 @@ class App extends React.Component {
         <React.Fragment>
           <TotalSpent transactions={this.state.transactions} />
           <DisplayTransactions transactions={this.state.transactions} uid={this.state.uid} />
-          <AddTransaction uid={this.state.uid} />
+          <AddTransaction uid={this.state.uid} budgets={this.state.budgets} />
         </React.Fragment>
       )
     }
