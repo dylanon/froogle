@@ -70,17 +70,17 @@ class App extends React.Component {
           // Store the transaction object in the array
           transactions.push(transactionObject);
         };
-        // Store the raw budgets (same code used to store transactions above)
+        // Store the raw categories (same code used to store transactions above)
         const rawCategories = snapshot.val().categories;
-        // Store each transaction's unique database key on the transaction object
+        // Store each category's unique database key on the category object
         const categories = [];
         for (let category in rawCategories) {
           const categoryObject = Object.assign({}, rawCategories[category]);
           categoryObject.key = category;
-          // Store the transaction object in the array
+          // Store the category object in the array
           categories.push(categoryObject);
         };
-        // Store the transactions array in state
+        // Store the transactions and categories arrays in state
         this.setState({
           transactions,
           categories
