@@ -5,6 +5,7 @@ import moment from 'moment';
 import AddTransaction from './components/addTransaction';
 import DisplayTransactions from './components/displayTransactions';
 import TotalSpent from './components/totalSpent';
+import Categories from './components/categories';
 
 class App extends React.Component {
     constructor(props) {
@@ -89,6 +90,7 @@ class App extends React.Component {
       return (
         <React.Fragment>
           <TotalSpent transactions={this.state.transactions} />
+          <Categories budgets={this.state.budgets} />
           <DisplayTransactions transactions={this.state.transactions} uid={this.state.uid} />
           <AddTransaction uid={this.state.uid} budgets={this.state.budgets} />
         </React.Fragment>
