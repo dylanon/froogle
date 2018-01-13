@@ -13,7 +13,7 @@ class App extends React.Component {
       this.state = {
         uid: '',
         transactions: [],
-        budgets: []
+        categories: []
       }
       this.listenForData = this.listenForData.bind(this);
     }
@@ -69,19 +69,19 @@ class App extends React.Component {
           transactions.push(transactionObject);
         };
         // Store the raw budgets (same code used to store transactions above)
-        const rawBudgets = snapshot.val().budgets;
+        const rawCategories = snapshot.val().categories;
         // Store each transaction's unique database key on the transaction object
-        const budgets = [];
-        for (let budget in rawBudgets) {
-          const budgetObject = Object.assign({}, rawBudgets[budget]);
-          budgetObject.key = budget;
+        const categories = [];
+        for (let category in rawCategories) {
+          const categoryObject = Object.assign({}, rawCategories[category]);
+          categoryObject.key = category;
           // Store the transaction object in the array
-          budgets.push(budgetObject);
+          categories.push(categoryObject);
         };
         // Store the transactions array in state
         this.setState({
           transactions,
-          budgets
+          categories
         });
       });
     }
@@ -90,9 +90,9 @@ class App extends React.Component {
       return (
         <React.Fragment>
           <TotalSpent transactions={this.state.transactions} />
-          <Categories budgets={this.state.budgets} />
+          <Categories categories={this.state.categories} />
           <DisplayTransactions transactions={this.state.transactions} uid={this.state.uid} />
-          <AddTransaction uid={this.state.uid} budgets={this.state.budgets} />
+          <AddTransaction uid={this.state.uid} categories={this.state.categories} />
         </React.Fragment>
       )
     }

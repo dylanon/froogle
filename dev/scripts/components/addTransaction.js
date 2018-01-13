@@ -44,13 +44,13 @@ export default class AddTransaction extends React.Component {
         };
         transactionsRef.push(transaction);
         // If this is a new category, store in database
-        const budgetsArray = Array.from(this.props.budgets);
-        const duplicateCategories = budgetsArray.filter(budget => {
-            return budget.category === this.state.detectedCategory;
+        const categoriesArray = Array.from(this.props.categories);
+        const duplicateCategories = categoriesArray.filter(category => {
+            return category.category === this.state.detectedCategory;
         });
         if (duplicateCategories.length === 0) {
-            const budgetsRef = firebase.database().ref(`users/${this.props.uid}/${year}/${month}/budgets`);
-            budgetsRef.push({
+            const categoriesRef = firebase.database().ref(`users/${this.props.uid}/${year}/${month}/categories`);
+            categoriesRef.push({
                 category: this.state.detectedCategory
             });
         } else {
