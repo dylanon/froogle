@@ -194,7 +194,7 @@ export default class AddTransaction extends React.Component {
         // Store category in state
         if (match) {
             // The first capture group contains the category name
-            const category = match[1];
+            const category = match[1].toLowerCase();
             this.setState({
                 detectedCategory: category
             });
