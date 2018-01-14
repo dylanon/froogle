@@ -121,7 +121,6 @@ class App extends React.Component {
           return category.category === this.state.filterCategory;
         });
       }
-      console.log(currentCategoryObject);
 
       return (
         <React.Fragment>
