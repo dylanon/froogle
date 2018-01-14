@@ -228,9 +228,10 @@ export default class AddTransaction extends React.Component {
         return (
             <div className="add-transaction">
                 <form className="add-transaction__form" onSubmit={this.handleSubmit}>
-                    <label htmlFor="add-transaction__input">Add Transaction</label>
+                    <label htmlFor="add-transaction__input">Enter transaction details</label>
                     <input type="text" id="add-transaction__input" onChange={this.handleChange} value={this.state.userString} />
-                    <input type="submit" value="Add"/>
+                    <label htmlFor="add-transaction__submit">Add transaction</label>
+                    <input type="submit" id="add-transaction__submit" value="Add"/>
                 </form>
                 <p>User entered: {this.state.userString}</p>
                 <p>Detected date: {moment(this.state.detectedDate, 'YYYY-MM-DD').format('MMMM D, YYYY')}</p>
