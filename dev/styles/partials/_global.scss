@@ -13,10 +13,6 @@ body {
     margin: 0 auto;
 }
 
-.header {
-    background: $primary;
-}
-
 .container {
     flex: 1 1 auto; // Grow to full page height
     display: flex;
@@ -31,7 +27,7 @@ body {
 
 .sidebar {
     width: 30%;
-    padding: 48px 48px 48px 0;
+    padding: 0 48px 0 0;
     background: #fafafa;
 }
 
