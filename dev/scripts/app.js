@@ -6,6 +6,7 @@ import AddTransaction from './components/addTransaction';
 import DisplayTransactions from './components/displayTransactions';
 import TotalSpent from './components/totalSpent';
 import Categories from './components/categories';
+import CategoryBudget from './components/categoryBudget'
 
 class App extends React.Component {
     constructor(props) {
@@ -113,9 +114,19 @@ class App extends React.Component {
       // Apply filters, if any, to downloaded transactions
       const transactions = this.applyTransactionFilters(this.state.transactions, this.state.filterCategory);
 
+      // Store the current category's object
+      let currentCategoryObject;
+      if (this.state.filterCategory.length > 0) {
+        currentCategoryObject = this.state.categories.find(category => {
+          return category.category === this.state.filterCategory;
+        });
+      }
+      console.log(currentCategoryObject);
+
       return (
         <React.Fragment>
           <TotalSpent transactions={transactions} />
+          <CategoryBudget currentCategoryObject={currentCategoryObject} />
           <Categories categories={this.state.categories} filterTransactionsByCategory={this.filterTransactionsByCategory} />
           <DisplayTransactions transactions={transactions} uid={this.state.uid} />
           <AddTransaction uid={this.state.uid} categories={this.state.categories} />
