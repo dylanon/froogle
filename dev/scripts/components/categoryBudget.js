@@ -1,22 +1,39 @@
 import React from 'react';
+import SetBudget from './setBudget.js';
 
 export default class CategoryBudget extends React.Component {
     render() {
         const currentCategoryObject = this.props.currentCategoryObject;
-        let content;
+        // Build category text
+        let categoryText;
         if (currentCategoryObject) {
-            content = <p>Category: #{currentCategoryObject.category}</p>
+            categoryText = <p>Category: #{currentCategoryObject.category}</p>
         } else {
-            content = <p>Viewing all transactions</p>
+            categoryText = <p>Viewing all transactions</p>
         }
+        // Build budget content
+        let budgetContent;
+        if (currentCategoryObject === undefined) {
+            // If not filtering by category, show the total budget
+            budgetContent = <p>Total budget for this month: $XXXX.XX</p>
+        } else if (Number(currentCategoryObject.budget) > 0) {
+            // If in a category && budget set to over 0, show the budget
+            budgetContent = (
+                <React.Fragment>
+                    <p>Budget: ${currentCategoryObject.budget}</p>
+                    <SetBudget currentCategoryObject={currentCategoryObject} uid={this.props.uid} />
+                </React.Fragment>
+            )
+        } else {
+            // If in a category && no budget set (or budget === 0), show a component that allows us to set it
+            budgetContent = <SetBudget currentCategoryObject={currentCategoryObject} uid={this.props.uid} />
+        }
+
         return (
             <section>
                 <h3>Budget</h3>
-                {content}
-                {this.currentCategoryObject && this.currentCategoryObject.budget
-                    ? <p>This category has a budget</p>
-                    : <p>No budget yet</p>
-                }
+                {categoryText}
+                {budgetContent}
             </section>
         )
     }
