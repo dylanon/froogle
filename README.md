@@ -22,9 +22,9 @@ Enter transactions easily in a single text field, and see your progress as time 
 ## Enhancements
 
 - Allow editing of transactions
-- Optionally accept a target amount for each category
+- **Done**: Optionally accept a target amount for each category
   - Show progress towards target by category
-- Create a monthly budget from all categories and their targets
+- **Done**: Create a monthly budget from all categories and their targets
   - Show progress towards monthly budget
 - Preserve a full history by month
   - Every new month, categories and targets from last month are preserved and actual spending/income resets to 0
@@ -32,7 +32,7 @@ Enter transactions easily in a single text field, and see your progress as time 
 - Do math while entering transactions
 - Track money owed to or from others
   - Log while entering a transaction (e.g. Split dinner with a friend - I spent 1/2 on #restaurants and they owe me the other half)
-  - Coudld be a shared category between users
+  - Could be a shared category between users
 - Export all data as CSV
 
 ## Credits
