@@ -14,9 +14,6 @@ export default class Categories extends React.Component {
                             <div>
                                 <a href="#" onClick={(e) => this.props.filterTransactionsByCategory(e, category.category)}>#{category.category}</a>
                             </div>
-                            <div>
-                                <a href="#">Set budget</a>
-                            </div>
                             {/* <a href="#">Remove</a> */}
                         </li>
                     )
