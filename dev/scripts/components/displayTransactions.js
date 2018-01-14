@@ -8,10 +8,7 @@ export default class DisplayTransactions extends React.Component {
         // Build database reference
         const uid = this.props.uid;
         const key = transaction.key;
-        const transactionMoment = moment(transaction.date, 'YYYY-MM-DD');
-        const year = transactionMoment.format('YYYY');
-        const month = transactionMoment.format('MM');
-        const dbRef = firebase.database().ref(`users/${uid}/${year}/${month}/transactions/${key}`);
+        const dbRef = firebase.database().ref(`users/${uid}/transactions/${key}`);
         // Delete the transaction
         dbRef.remove()
         .catch(error => {

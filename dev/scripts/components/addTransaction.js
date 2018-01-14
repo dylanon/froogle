@@ -32,10 +32,7 @@ export default class AddTransaction extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        const detectedMoment = moment(this.state.detectedDate, 'YYYY-MM-DD');
-        const year = detectedMoment.format('YYYY');
-        const month = detectedMoment.format('MM');
-        const transactionsRef = firebase.database().ref(`users/${this.props.uid}/${year}/${month}/transactions`);
+        const transactionsRef = firebase.database().ref(`users/${this.props.uid}/transactions`);
         const transaction = {
             date: this.state.detectedDate,
             amount: this.state.detectedAmount,
@@ -49,7 +46,7 @@ export default class AddTransaction extends React.Component {
             return category.category === this.state.detectedCategory;
         });
         if (duplicateCategories.length === 0) {
-            const categoriesRef = firebase.database().ref(`users/${this.props.uid}/${year}/${month}/categories`);
+            const categoriesRef = firebase.database().ref(`users/${this.props.uid}/categories`);
             categoriesRef.push({
                 category: this.state.detectedCategory
             });

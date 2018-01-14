@@ -24,10 +24,7 @@ export default class SetBudget extends React.Component {
         e.preventDefault();
         if (Number(this.state.userInputtedBudget) > 0) {
             // Create the database reference
-            const today = moment();
-            const year = today.format('YYYY');
-            const month = today.format('MM');
-            const categoryRef = firebase.database().ref(`users/${this.props.uid}/${year}/${month}/categories/${categoryKey}`);
+            const categoryRef = firebase.database().ref(`users/${this.props.uid}/categories/${categoryKey}`);
             const userBudgetToTwoDecimals = Number(this.state.userInputtedBudget).toFixed(2);
             categoryRef.update({
                 budget: userBudgetToTwoDecimals

@@ -55,11 +55,8 @@ class App extends React.Component {
     
     listenForData() {
       // Create the database reference
-      const today = moment();
-      const year = today.format('YYYY');
-      const month = today.format('MM');
-      const dbRef = firebase.database().ref(`users/${this.state.uid}/${year}/${month}`);
-      // Download the current month's transactions, and listen for changes and new transactions
+      const dbRef = firebase.database().ref(`users/${this.state.uid}`);
+      // Download the transactions, and listen for changes and new transactions
       dbRef.on('value', snapshot => {
         // Store the raw transactions
         const rawTransactions = snapshot.val().transactions;
