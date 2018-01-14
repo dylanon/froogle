@@ -13,9 +13,9 @@ export default class Title extends React.Component {
             title = 'All Transactions';
         }
         return (
-            <section>
+            <div className="view-title">
                 <h2>{title}</h2>
-            </section>
+            </div>
         )
     }
 }

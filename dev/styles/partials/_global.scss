@@ -1,5 +1,11 @@
+html {
+    font-size: 62.5%;
+}
+
 body {
     background: $body-background;
+    font-family: 'Roboto Slab', sans-serif;
+    font-size: 1.6rem;
 }
 
 #app {
