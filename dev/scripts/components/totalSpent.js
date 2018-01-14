@@ -7,7 +7,16 @@ export default class TotalSpent extends React.Component {
         const total = transactions.reduce((accumulator, transaction) => {
             return accumulator += Number(transaction.amount);
         }, 0);
+
+        // Generate text to describe spending context
+        const currentCategoryObject = this.props.currentCategoryObject;
+        let spendingContext;
+        if (currentCategoryObject) {
+            spendingContext = `this Month in #${currentCategoryObject.category}`;
+        } else {
+            spendingContext = 'this Month';
+        }
         
-        return <h2>Total Spent: {total.toFixed(2)}</h2>
+        return <h2>Total Spent {spendingContext}: {total.toFixed(2)}</h2>
     }
 }
