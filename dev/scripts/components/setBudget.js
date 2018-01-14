@@ -56,10 +56,10 @@ export default class SetBudget extends React.Component {
         let content;
         if (this.state.formIsOpen) {
             content = (
-                <form onSubmit={(e) => this.handleSubmit(e, categoryKey)}>
-                    <label htmlFor="budget-amount-input">Enter budget</label>
+                <form className="set-budget-form" onSubmit={(e) => this.handleSubmit(e, categoryKey)}>
+                    <label htmlFor="budget-amount-input" className="visuallyhidden">Enter budget</label>
                     <input type="number" id="budget-amount-input" value={this.state.userInputtedBudget} placeholder="0.00" step="0.01" onChange={this.handleChange} />
-                    <label htmlFor="submit-budget-amount">Submit budget</label>
+                    <label htmlFor="submit-budget-amount" className="visuallyhidden">Submit budget</label>
                     <input type="submit" className="button" id="submit-budget-amount" value="Set" />
                 </form>
             )

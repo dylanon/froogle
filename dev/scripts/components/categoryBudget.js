@@ -4,13 +4,6 @@ import SetBudget from './setBudget.js';
 export default class CategoryBudget extends React.Component {
     render() {
         const currentCategoryObject = this.props.currentCategoryObject;
-        // Build category text
-        let categoryText;
-        if (currentCategoryObject) {
-            categoryText = <p>Category: #{currentCategoryObject.category}</p>
-        } else {
-            categoryText = <p>Viewing all transactions</p>
-        }
         // Build budget content
         let budgetContent;
         if (currentCategoryObject === undefined) {
@@ -22,7 +15,7 @@ export default class CategoryBudget extends React.Component {
                     return total;
                 }
             }, 0);
-            budgetContent = <p>Total budgeted across all categories: ${monthlyBudget}</p>
+            budgetContent = <p>Total budgeted: ${monthlyBudget}</p>
         } else if (Number(currentCategoryObject.budget) > 0) {
             // If in a category && budget set to over 0, show the budget
             budgetContent = (
@@ -37,9 +30,7 @@ export default class CategoryBudget extends React.Component {
         }
 
         return (
-            <div>
-                <h3>Budget</h3>
-                {categoryText}
+            <div className="category-budget">
                 {budgetContent}
             </div>
         )
