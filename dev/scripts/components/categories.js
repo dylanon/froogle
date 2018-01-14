@@ -4,8 +4,8 @@ export default class Categories extends React.Component {
     render() {
         const categoriesArray = this.props.categories;
         return (
-            <nav>
-                <ul>
+            <nav className="categories-nav">
+                <ul className="categories-list">
                     <li>
                         <a href="#" onClick={(e) => this.props.filterTransactionsByCategory(e, '')}>View all</a>
                     </li>
