@@ -125,7 +125,7 @@ class App extends React.Component {
       return (
         <React.Fragment>
           <TotalSpent transactions={transactions} currentCategoryObject={currentCategoryObject} />
-          <CategoryBudget currentCategoryObject={currentCategoryObject} uid={this.state.uid} />
+          <CategoryBudget currentCategoryObject={currentCategoryObject} uid={this.state.uid} categories={this.state.categories} />
           <Categories categories={this.state.categories} filterTransactionsByCategory={this.filterTransactionsByCategory} />
           <DisplayTransactions transactions={transactions} uid={this.state.uid} />
           <AddTransaction uid={this.state.uid} categories={this.state.categories} />

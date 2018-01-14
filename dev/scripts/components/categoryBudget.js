@@ -14,8 +14,15 @@ export default class CategoryBudget extends React.Component {
         // Build budget content
         let budgetContent;
         if (currentCategoryObject === undefined) {
-            // If not filtering by category, show the total budget
-            budgetContent = <p>Total budget for this month: $XXXX.XX</p>
+            // If not filtering by category, calculate and show the total budget
+            const monthlyBudget = this.props.categories.reduce((total, category) => {
+                if (category.budget) {
+                    return total + Number(category.budget);
+                } else {
+                    return total;
+                }
+            }, 0);
+            budgetContent = <p>Total budget for this month: ${monthlyBudget}</p>
         } else if (Number(currentCategoryObject.budget) > 0) {
             // If in a category && budget set to over 0, show the budget
             budgetContent = (
