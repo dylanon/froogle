@@ -67,7 +67,7 @@ export default class SetBudget extends React.Component {
             content = <a href="#" onClick={this.openForm}>Set budget</a>;
         }
         return (
-                <div>
+                <div className="set-budget">
                     {content}
                 </div>
         )

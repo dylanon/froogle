@@ -5,7 +5,7 @@ html {
 body {
     background: $body-background;
     font-family: 'Roboto Slab', sans-serif;
-    font-size: 1.6rem;
+    font-size: $font-size;
 }
 
 #app {
@@ -65,4 +65,9 @@ body {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
+    font-size: 2rem;
+
+    p {
+        margin-bottom: 0.4rem;
+    }
 }

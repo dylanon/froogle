@@ -26,7 +26,12 @@ export default class CategoryBudget extends React.Component {
             )
         } else {
             // If in a category && no budget set (or budget === 0), show a component that allows us to set it
-            budgetContent = <SetBudget currentCategoryObject={currentCategoryObject} uid={this.props.uid} />
+            budgetContent = (
+                <React.Fragment>
+                    <p>No budget set</p>
+                    <SetBudget currentCategoryObject={currentCategoryObject} uid={this.props.uid} />
+                </React.Fragment>
+            )
         }
 
         return (

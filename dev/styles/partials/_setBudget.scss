@@ -1,3 +1,7 @@
+.set-budget {
+    font-size: $font-size;
+}
+
 #budget-amount-input {
     @extend .input-field;
     border: 1px solid rgba(0, 0, 0, 0.144);
