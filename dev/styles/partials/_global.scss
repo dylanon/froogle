@@ -34,6 +34,8 @@ body {
 .main {
     width: 70%;
     border: 1px solid rgba(0, 0, 0, 0.144);
-    padding: 24px;
+    border-top: 0;
+    border-bottom: 0;
+    padding: 24px 48px;
     background: white;
 }
