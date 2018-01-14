@@ -223,7 +223,7 @@ export default class AddTransaction extends React.Component {
 
     render() {
         return (
-            <div className="add-transaction">
+            <section className="add-transaction">
                 <form className="add-transaction__form" onSubmit={this.handleSubmit}>
                     <label htmlFor="add-transaction__input">Enter transaction details</label>
                     <input type="text" id="add-transaction__input" onChange={this.handleChange} value={this.state.userString} />
@@ -235,7 +235,7 @@ export default class AddTransaction extends React.Component {
                 <p>Detected amount: ${this.state.detectedAmount}</p>
                 <p>Detected category: #{this.state.detectedCategory}</p>
                 <p>Detected description: {this.state.detectedDescription}</p>
-            </div>
+            </section>
         )
     }
 }

@@ -37,11 +37,11 @@ export default class CategoryBudget extends React.Component {
         }
 
         return (
-            <section>
+            <div>
                 <h3>Budget</h3>
                 {categoryText}
                 {budgetContent}
-            </section>
+            </div>
         )
     }
 }

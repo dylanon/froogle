@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import firebase from './firebase';
+import Header from './components/header';
+import Title from './components/title';
 import AddTransaction from './components/addTransaction';
 import DisplayTransactions from './components/displayTransactions';
 import TotalSpent from './components/totalSpent';
@@ -120,11 +122,21 @@ class App extends React.Component {
 
       return (
         <React.Fragment>
-          <TotalSpent transactions={transactions} currentCategoryObject={currentCategoryObject} />
-          <CategoryBudget currentCategoryObject={currentCategoryObject} uid={this.state.uid} categories={this.state.categories} />
-          <Categories categories={this.state.categories} filterTransactionsByCategory={this.filterTransactionsByCategory} />
-          <DisplayTransactions transactions={transactions} uid={this.state.uid} />
-          <AddTransaction uid={this.state.uid} categories={this.state.categories} />
+          <Header />
+          <div className="main-container">
+            <aside>
+              <Categories categories={this.state.categories} filterTransactionsByCategory={this.filterTransactionsByCategory} />
+            </aside>
+            <main>
+              <Title filterCategory={this.state.filterCategory} />
+              <section>
+                <TotalSpent transactions={transactions} currentCategoryObject={currentCategoryObject} />
+                <CategoryBudget currentCategoryObject={currentCategoryObject} uid={this.state.uid} categories={this.state.categories} />
+              </section>
+              <DisplayTransactions transactions={transactions} uid={this.state.uid} />
+              <AddTransaction uid={this.state.uid} categories={this.state.categories} />
+            </main>
+          </div>
         </React.Fragment>
       )
     }

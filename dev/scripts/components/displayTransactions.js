@@ -32,7 +32,7 @@ export default class DisplayTransactions extends React.Component {
         });
 
         return (
-            <div className="display-transactions">
+            <section className="display-transactions">
                 <h2>Transactions</h2>
                 <ul className="display-transactions__list">
                     {transactionsArray.map(transaction => {
@@ -49,7 +49,7 @@ export default class DisplayTransactions extends React.Component {
                         )
                     })}
                 </ul>
-            </div>
+            </section>
         )
     }
 }
