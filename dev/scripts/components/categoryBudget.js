@@ -22,7 +22,7 @@ export default class CategoryBudget extends React.Component {
                     return total;
                 }
             }, 0);
-            budgetContent = <p>Total budget for this month: ${monthlyBudget}</p>
+            budgetContent = <p>Total budgeted across all categories: ${monthlyBudget}</p>
         } else if (Number(currentCategoryObject.budget) > 0) {
             // If in a category && budget set to over 0, show the budget
             budgetContent = (

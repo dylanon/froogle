@@ -3,7 +3,7 @@ import React from 'react';
 export default class TotalSpent extends React.Component {
     render() {
         const transactions = this.props.transactions;
-        // Compute the total spent this month
+        // Compute the total spent
         const total = transactions.reduce((accumulator, transaction) => {
             return accumulator += Number(transaction.amount);
         }, 0);
@@ -12,11 +12,11 @@ export default class TotalSpent extends React.Component {
         const currentCategoryObject = this.props.currentCategoryObject;
         let spendingContext;
         if (currentCategoryObject) {
-            spendingContext = `this Month in #${currentCategoryObject.category}`;
+            spendingContext = `in #${currentCategoryObject.category}`;
         } else {
-            spendingContext = 'this Month';
+            spendingContext = '';
         }
         
-        return <h2>Total Spent {spendingContext}: {total.toFixed(2)}</h2>
+        return <h2>Total Spent {spendingContext}: ${total.toFixed(2)}</h2>
     }
 }
