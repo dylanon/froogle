@@ -95,12 +95,29 @@ class App extends React.Component {
       });
     }
 
+    applyTransactionFilters(transactionsArray, filterCategory) {
+      let transactions;
+      if (filterCategory.length > 0) {
+          // Filter by category
+          transactions = transactionsArray.filter(transaction => {
+              return transaction.category === filterCategory;
+          });
+      } else {
+          // Display all transactions (no filtering)
+          transactions = transactionsArray;
+      }
+      return transactions;
+    }
+
     render() {
+      // Apply filters, if any, to downloaded transactions
+      const transactions = this.applyTransactionFilters(this.state.transactions, this.state.filterCategory);
+
       return (
         <React.Fragment>
-          <TotalSpent transactions={this.state.transactions} />
+          <TotalSpent transactions={transactions} />
           <Categories categories={this.state.categories} filterTransactionsByCategory={this.filterTransactionsByCategory} />
-          <DisplayTransactions transactions={this.state.transactions} uid={this.state.uid} filterCategory={this.state.filterCategory} />
+          <DisplayTransactions transactions={transactions} uid={this.state.uid} />
           <AddTransaction uid={this.state.uid} categories={this.state.categories} />
         </React.Fragment>
       )

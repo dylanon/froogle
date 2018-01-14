@@ -22,16 +22,7 @@ export default class DisplayTransactions extends React.Component {
     }
 
     render() {
-        let transactionsArray;
-        if (this.props.filterCategory.length > 0) {
-            // Filter by category
-            transactionsArray = this.props.transactions.filter(transaction => {
-                return transaction.category === this.props.filterCategory;
-            });
-        } else {
-            // Display all transactions (no filtering)
-            transactionsArray = Array.from(this.props.transactions);
-        }
+        const transactionsArray = Array.from(this.props.transactions);
         // Sort transactions reverse chronologically
         transactionsArray.sort((a , b) => {
             const momentA = moment(a.date, 'YYYY-MM-DD');
@@ -43,8 +34,6 @@ export default class DisplayTransactions extends React.Component {
             }
         });
 
-
-        
         return (
             <div className="display-transactions">
                 <h2>Transactions</h2>
