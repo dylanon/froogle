@@ -1,9 +1,32 @@
 /* Add Transaction */
 
-// .add-transaction {
-//     margin: auto;
+.add-transaction {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: $primary;
+    padding: 10px;
+}
 
-//     label {
-//         display: block;
-//     }
-// }
+.add-transaction__form {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+}
+
+#add-transaction__input {
+    width: 55%;
+    border-radius: 5px;
+    border: 0;
+}
+
+#add-transaction__submit {
+    padding: 4px 8px;
+    border-radius: 5px;
+    border: 0;
+    text-transform: lowercase;
+    margin: 0 24px;
+    background: rebeccapurple;
+    color: white;
+}

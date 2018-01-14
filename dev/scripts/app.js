@@ -129,12 +129,14 @@ class App extends React.Component {
                 <Categories categories={this.state.categories} filterTransactionsByCategory={this.filterTransactionsByCategory} />
               </aside>
               <main className="main">
-                <Title filterCategory={this.state.filterCategory} />
-                <section>
-                  <TotalSpent transactions={transactions} currentCategoryObject={currentCategoryObject} />
-                  <CategoryBudget currentCategoryObject={currentCategoryObject} uid={this.state.uid} categories={this.state.categories} />
+                <section className="transaction-info">
+                  <Title filterCategory={this.state.filterCategory} />
+                  <section>
+                    <TotalSpent transactions={transactions} currentCategoryObject={currentCategoryObject} />
+                    <CategoryBudget currentCategoryObject={currentCategoryObject} uid={this.state.uid} categories={this.state.categories} />
+                  </section>
+                  <DisplayTransactions transactions={transactions} uid={this.state.uid} />
                 </section>
-                <DisplayTransactions transactions={transactions} uid={this.state.uid} />
                 <AddTransaction uid={this.state.uid} categories={this.state.categories} />
               </main>
             </div>

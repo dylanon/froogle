@@ -224,17 +224,19 @@ export default class AddTransaction extends React.Component {
     render() {
         return (
             <section className="add-transaction">
-                <form className="add-transaction__form" onSubmit={this.handleSubmit}>
-                    <label htmlFor="add-transaction__input">Enter transaction details</label>
-                    <input type="text" id="add-transaction__input" onChange={this.handleChange} value={this.state.userString} />
-                    <label htmlFor="add-transaction__submit">Add transaction</label>
-                    <input type="submit" id="add-transaction__submit" value="Add"/>
-                </form>
-                <p>User entered: {this.state.userString}</p>
-                <p>Detected date: {moment(this.state.detectedDate, 'YYYY-MM-DD').format('MMMM D, YYYY')}</p>
-                <p>Detected amount: ${this.state.detectedAmount}</p>
-                <p>Detected category: #{this.state.detectedCategory}</p>
-                <p>Detected description: {this.state.detectedDescription}</p>
+                <div className="wrapper">
+                    <form className="add-transaction__form" onSubmit={this.handleSubmit}>
+                        <label htmlFor="add-transaction__input" className="visuallyhidden">Enter transaction details</label>
+                        <input type="text" id="add-transaction__input" onChange={this.handleChange} value={this.state.userString} />
+                        <label htmlFor="add-transaction__submit" className="visuallyhidden">Add transaction</label>
+                        <input type="submit" id="add-transaction__submit" value="Add"/>
+                    </form>
+                    {/* <p>User entered: {this.state.userString}</p>
+                    <p>Detected date: {moment(this.state.detectedDate, 'YYYY-MM-DD').format('MMMM D, YYYY')}</p>
+                    <p>Detected amount: ${this.state.detectedAmount}</p>
+                    <p>Detected category: #{this.state.detectedCategory}</p>
+                    <p>Detected description: {this.state.detectedDescription}</p> */}
+                </div>
             </section>
         )
     }
