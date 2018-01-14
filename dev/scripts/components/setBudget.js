@@ -1,6 +1,5 @@
 import React from 'react';
 import firebase from '../firebase';
-import moment from 'moment';
 
 export default class SetBudget extends React.Component {
     constructor(props) {

@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import firebase from './firebase';
-import moment from 'moment';
 import AddTransaction from './components/addTransaction';
 import DisplayTransactions from './components/displayTransactions';
 import TotalSpent from './components/totalSpent';
