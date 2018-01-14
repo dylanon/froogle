@@ -229,7 +229,7 @@ export default class AddTransaction extends React.Component {
                         <label htmlFor="add-transaction__input" className="visuallyhidden">Enter transaction details</label>
                         <input type="text" id="add-transaction__input" onChange={this.handleChange} value={this.state.userString} />
                         <label htmlFor="add-transaction__submit" className="visuallyhidden">Add transaction</label>
-                        <input type="submit" id="add-transaction__submit" value="Add"/>
+                        <input type="submit" id="add-transaction__submit" className="button" value="Add"/>
                     </form>
                     {/* <p>User entered: {this.state.userString}</p>
                     <p>Detected date: {moment(this.state.detectedDate, 'YYYY-MM-DD').format('MMMM D, YYYY')}</p>
