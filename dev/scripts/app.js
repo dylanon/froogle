@@ -123,19 +123,21 @@ class App extends React.Component {
       return (
         <React.Fragment>
           <Header />
-          <div className="main-container">
-            <aside>
-              <Categories categories={this.state.categories} filterTransactionsByCategory={this.filterTransactionsByCategory} />
-            </aside>
-            <main>
-              <Title filterCategory={this.state.filterCategory} />
-              <section>
-                <TotalSpent transactions={transactions} currentCategoryObject={currentCategoryObject} />
-                <CategoryBudget currentCategoryObject={currentCategoryObject} uid={this.state.uid} categories={this.state.categories} />
-              </section>
-              <DisplayTransactions transactions={transactions} uid={this.state.uid} />
-              <AddTransaction uid={this.state.uid} categories={this.state.categories} />
-            </main>
+          <div className="container">
+            <div className="wrapper container-content">
+              <aside className="sidebar">
+                <Categories categories={this.state.categories} filterTransactionsByCategory={this.filterTransactionsByCategory} />
+              </aside>
+              <main className="main">
+                <Title filterCategory={this.state.filterCategory} />
+                <section>
+                  <TotalSpent transactions={transactions} currentCategoryObject={currentCategoryObject} />
+                  <CategoryBudget currentCategoryObject={currentCategoryObject} uid={this.state.uid} categories={this.state.categories} />
+                </section>
+                <DisplayTransactions transactions={transactions} uid={this.state.uid} />
+                <AddTransaction uid={this.state.uid} categories={this.state.categories} />
+              </main>
+            </div>
           </div>
         </React.Fragment>
       )

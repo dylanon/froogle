@@ -1,0 +1,37 @@
+#app {
+    min-height: 100vh;
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.wrapper {
+    max-width: $wrapper-width;
+    margin: 0 auto;
+}
+
+.header {
+    background: $primary;
+}
+
+.container {
+    border: 1px solid green;
+    flex: 1 1 auto; // Grow to full page height
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.container-content {
+    flex: 1 1 auto; // Grow to full width
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.sidebar {
+    width: 30%;
+    border: 1px solid pink;
+}
+
+.main {
+    width: 70%;
+    border: 1px solid teal;
+}
