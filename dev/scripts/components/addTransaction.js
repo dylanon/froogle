@@ -227,7 +227,7 @@ export default class AddTransaction extends React.Component {
                 <div className="wrapper">
                     <form className="add-transaction__form" onSubmit={this.handleSubmit}>
                         <label htmlFor="add-transaction__input" className="visuallyhidden">Enter transaction details</label>
-                        <input type="text" id="add-transaction__input" onChange={this.handleChange} value={this.state.userString} />
+                        <input type="text" id="add-transaction__input" onChange={this.handleChange} value={this.state.userString} placeholder="Enter an expense, e.g. jan12 Apples and oranges 5.85 #groceries"/>
                         <label htmlFor="add-transaction__submit" className="visuallyhidden">Add transaction</label>
                         <input type="submit" id="add-transaction__submit" className="button" value="Add"/>
                     </form>

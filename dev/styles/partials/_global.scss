@@ -26,6 +26,7 @@ a {
 .wrapper {
     max-width: $wrapper-width;
     margin: 0 auto;
+    padding: 0 3.2rem;
 }
 
 .container {
@@ -63,6 +64,7 @@ a {
 .input-field {
     border-radius: 5px;
     border: 0;
+    padding: 0 0.5em;
 }
 
 .button {
