@@ -38,12 +38,12 @@ export default class DisplayTransactions extends React.Component {
                     {transactionsArray.map(transaction => {
                         return (
                             <li className="display-transactions__item" key={transaction.key}>
-                                <div className="display-transactions__item-date">{moment(transaction.date, 'YYYY-MM-DD').format('MMM DD')}</div>
-                                <div className="display-transactions__item-description">{transaction.description}</div>
-                                <div className="display-transactions__item-amount">{transaction.amount}</div>
-                                <div className="display-transactions__item-category">#{transaction.category}</div>
-                                <div className="display-transactions__item-delete">
-                                    <a href="#" onClick={(e) => this.handleDelete(e, transaction)}>Delete</a>
+                                <div className="display-transactions__item-column display-transactions__item-date">{moment(transaction.date, 'YYYY-MM-DD').format('MMM DD')}</div>
+                                <div className="display-transactions__item-column display-transactions__item-description">{transaction.description}</div>
+                                <div className="display-transactions__item-column display-transactions__item-amount">{transaction.amount}</div>
+                                <div className="display-transactions__item-column display-transactions__item-category">#{transaction.category}</div>
+                                <div className="display-transactions__item-column display-transactions__item-delete">
+                                    <a href="#" onClick={(e) => this.handleDelete(e, transaction)}><i className="fas fa-trash-alt"></i></a>
                                 </div>
                             </li>
                         )
