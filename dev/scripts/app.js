@@ -45,7 +45,6 @@ class App extends React.Component {
       firebase.auth().signInAnonymously()
         .then(res => {
           console.log('Signing in anonymously.')
-          console.log(res);
         })
         .catch(error => {
           const errorCode = error.code;
