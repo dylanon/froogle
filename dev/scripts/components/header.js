@@ -31,7 +31,7 @@ export default class Header extends React.Component {
                         Happy Froogling! 💸 💸 💸
                     </p>
                     <p>
-                        Built with <i class="fas fa-heart" title="Love"></i> by <a href="http://dylanon.com">Dylan On</a>.
+                        Built with <i className="fas fa-heart" title="Love"></i> by <a href="http://dylanon.com">Dylan On</a>.
                     </p>
                 </div>
             </header>

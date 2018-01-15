@@ -59,31 +59,34 @@ class App extends React.Component {
       const dbRef = firebase.database().ref(`users/${this.state.uid}`);
       // Download the transactions, and listen for changes and new transactions
       dbRef.on('value', snapshot => {
-        // Store the raw transactions
-        const rawTransactions = snapshot.val().transactions;
-        // Store each transaction's unique database key on the transaction object
-        const transactions = [];
-        for (let transaction in rawTransactions) {
-          const transactionObject = Object.assign({}, rawTransactions[transaction]);
-          transactionObject.key = transaction;
-          // Store the transaction object in the array
-          transactions.push(transactionObject);
-        };
-        // Store the raw categories (same code used to store transactions above)
-        const rawCategories = snapshot.val().categories;
-        // Store each category's unique database key on the category object
-        const categories = [];
-        for (let category in rawCategories) {
-          const categoryObject = Object.assign({}, rawCategories[category]);
-          categoryObject.key = category;
-          // Store the category object in the array
-          categories.push(categoryObject);
-        };
-        // Store the transactions and categories arrays in state
-        this.setState({
-          transactions,
-          categories
-        });
+        // Only proceed if we found some data
+        if (snapshot.val()) {
+          // Store the raw transactions
+          const rawTransactions = snapshot.val().transactions;
+          // Store each transaction's unique database key on the transaction object
+          const transactions = [];
+          for (let transaction in rawTransactions) {
+            const transactionObject = Object.assign({}, rawTransactions[transaction]);
+            transactionObject.key = transaction;
+            // Store the transaction object in the array
+            transactions.push(transactionObject);
+          };
+          // Store the raw categories (same code used to store transactions above)
+          const rawCategories = snapshot.val().categories;
+          // Store each category's unique database key on the category object
+          const categories = [];
+          for (let category in rawCategories) {
+            const categoryObject = Object.assign({}, rawCategories[category]);
+            categoryObject.key = category;
+            // Store the category object in the array
+            categories.push(categoryObject);
+          };
+          // Store the transactions and categories arrays in state
+          this.setState({
+            transactions,
+            categories
+          });
+        } 
       });
     }
 
