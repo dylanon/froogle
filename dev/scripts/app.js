@@ -27,7 +27,6 @@ class App extends React.Component {
       firebase.auth().onAuthStateChanged(user => {
         if (user) {
           console.log('User is signed in!');
-          console.log(user);
           // Store user id in state
           this.setState({
             uid: user.uid
