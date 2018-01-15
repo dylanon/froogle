@@ -4,6 +4,13 @@
     margin-bottom: 1px;
 }
 
+.header-content {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .logo {
     @include logoFont;
     text-transform: lowercase;
@@ -11,4 +18,40 @@
     color: white;
     text-shadow: 3px 3px 0px darken($secondary, 10%);
     display: inline-block;
+}
+
+.about-this-page {
+    display: block;
+    font-size: 1.4em;
+    color: white;
+
+    &:hover {
+        color: $secondary;
+    }
+}
+
+.about-modal {
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    box-shadow: 5px 5px 0 $secondary;
+    border: 1px solid black;
+    padding: 2.4rem;
+    transition: top 0.7s ease;
+
+    &__close {
+        position: absolute;
+        top: 1em;
+        right: 1.2em;
+    }
+
+    @media (max-width: 800px) {
+        width: 80%;
+    }
+
+    @media (max-width: 400px) {
+        width: 95%;
+    }
 }
