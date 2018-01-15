@@ -23,9 +23,9 @@ export default class Header extends React.Component {
                 <div className="about-modal">
                     <a href="#" className="about-modal__close" onClick={this.closeModal}>Close</a>
                     <h2>Froogle is currently in alpha.</h2>
-                    <p>Please do not store any important information here - You will likely lose access to it.</p>
+                    <p>Please don't store critical information here - You may lose access.</p>
                     <p>
-                        You're logged into Froogle anonymously - This temporary account is associated with this device only. It's not currently possible to access your Froogle data from other devices (coming soon!.
+                        You're logged into Froogle anonymously - Your temporary account is associated with this browser only. It's not currently possible to access your Froogle data from other devices (coming soon).
                     </p>
                     <p>
                         Happy Froogling! 💸 💸 💸
