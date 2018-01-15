@@ -86,3 +86,19 @@
         }
     }
 }
+
+.no-transactions {
+    &__lead {
+        font-size: 1.4em;
+        text-align: center;
+    }
+
+    &__emphasize {
+        font-weight: 700;
+        margin-left: 0.1em;
+    }
+
+    li {
+        margin: 1em 0;
+    }
+}

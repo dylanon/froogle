@@ -23,6 +23,12 @@ a {
     }
 }
 
+code {
+    background: $primary;
+    color: white;
+    padding: 0 6px;
+}
+
 .wrapper {
     max-width: $wrapper-width;
     margin: 0 auto;
