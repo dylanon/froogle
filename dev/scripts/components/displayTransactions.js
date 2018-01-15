@@ -45,7 +45,7 @@ export default class DisplayTransactions extends React.Component {
                                 <div className="display-transactions__item-column display-transactions__item-amount">{transaction.amount}</div>
                                 <div className="display-transactions__item-column display-transactions__item-category">#{transaction.category}</div>
                                 <div className="display-transactions__item-column display-transactions__item-delete">
-                                    <a href="#" onClick={(e) => this.handleDelete(e, transaction)}><i className="fas fa-trash-alt"></i></a>
+                                    <a href="#" onClick={(e) => this.handleDelete(e, transaction)}><i title="Delete this transaction" className="fas fa-trash-alt"></i></a>
                                 </div>
                             </li>
                         )

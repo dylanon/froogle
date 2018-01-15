@@ -108,6 +108,10 @@ code {
     margin: 0 24px;
     background: $secondary;
     color: white;
+
+    &:hover {
+        background: lighten($secondary, 5%);
+    }
 }
 
 .spending-stats {
