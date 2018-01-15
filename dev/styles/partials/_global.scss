@@ -14,6 +14,15 @@ body {
     flex-flow: column nowrap;
 }
 
+a {
+    color: $secondary;
+    text-decoration: none;
+
+    &:hover {
+        color: $primary;
+    }
+}
+
 .wrapper {
     max-width: $wrapper-width;
     margin: 0 auto;
@@ -35,6 +44,11 @@ body {
     width: 30%;
     padding: 24px 48px 24px 0;
     background: #fafafa;
+
+    h2 {
+        font-size: 2.4rem;
+        margin: 0.83em 0;
+    }
 }
 
 .main {
@@ -57,7 +71,7 @@ body {
     border: 0;
     text-transform: lowercase;
     margin: 0 24px;
-    background: rebeccapurple;
+    background: $secondary;
     color: white;
 }
 

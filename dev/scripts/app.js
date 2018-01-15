@@ -126,6 +126,7 @@ class App extends React.Component {
           <div className="container">
             <div className="wrapper container-content">
               <aside className="sidebar">
+                <h2>Filter transactions by category:</h2>
                 <Categories categories={this.state.categories} filterTransactionsByCategory={this.filterTransactionsByCategory} />
               </aside>
               <main className="main">
