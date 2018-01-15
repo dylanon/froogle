@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import firebase from '../firebase';
+import PreviewTransaction from './previewTransaction';
 
 export default class AddTransaction extends React.Component {
     constructor(props) {
@@ -26,8 +27,13 @@ export default class AddTransaction extends React.Component {
         this.setState({
             userString
         });
-        // Start processing the string
-        this.detectDate(userString);
+        // Check if the string has any length. If not, clear state
+        if (userString.length > 0) {
+            // Start processing the string
+            this.detectDate(userString);
+        } else {
+            this.clearForm();
+        }
     }
 
     handleSubmit(e) {
@@ -39,22 +45,32 @@ export default class AddTransaction extends React.Component {
             category: this.state.detectedCategory,
             description: this.state.detectedDescription
         };
-        transactionsRef.push(transaction);
-        // If this is a new category, store in database
-        const categoriesArray = Array.from(this.props.categories);
-        const duplicateCategories = categoriesArray.filter(category => {
-            return category.category === this.state.detectedCategory;
-        });
-        if (duplicateCategories.length === 0) {
-            const categoriesRef = firebase.database().ref(`users/${this.props.uid}/categories`);
-            categoriesRef.push({
-                category: this.state.detectedCategory
-            });
-        } else {
-            console.log('Category already exists in the database.');
+        // Validate the transaction (check if any properties are empty)
+        let isValidTransaction = true;
+        for (let property in transaction) {
+            if (transaction[property].length === 0) {
+                isValidTransaction = false;
+            }
         }
-        // Clear the user input (and any details stored in state)
-        this.clearForm();
+        // Only push to the database if there is something in the transaction
+        if (isValidTransaction) {
+            transactionsRef.push(transaction);
+            // If this is a new category, store in database
+            const categoriesArray = Array.from(this.props.categories);
+            const duplicateCategories = categoriesArray.filter(category => {
+                return category.category === this.state.detectedCategory;
+            });
+            if (duplicateCategories.length === 0) {
+                const categoriesRef = firebase.database().ref(`users/${this.props.uid}/categories`);
+                categoriesRef.push({
+                    category: this.state.detectedCategory
+                });
+            } else {
+                console.log('Category already exists in the database.');
+            }
+            // Clear the user input (and any details stored in state)
+            this.clearForm();
+        }
     }
 
     clearForm() {
@@ -222,22 +238,30 @@ export default class AddTransaction extends React.Component {
     }
 
     render() {
+        // Determine if preview should be shown by PreviewTransaction component
+        let showPreview = false;
+        if (this.state.detectedDate.length > 0 || this.state.detectedAmount.length > 0 || this.state.detectedDescription.length > 0 || this.state.detectedCategory.length > 0) {
+            showPreview = true;
+        }
         return (
-            <section className="add-transaction">
-                <div className="wrapper">
-                    <form className="add-transaction__form" onSubmit={this.handleSubmit}>
-                        <label htmlFor="add-transaction__input" className="visuallyhidden">Enter transaction details</label>
-                        <input type="text" id="add-transaction__input" onChange={this.handleChange} value={this.state.userString} placeholder="Enter an expense, e.g. jan12 Apples and oranges 5.85 #groceries"/>
-                        <label htmlFor="add-transaction__submit" className="visuallyhidden">Add transaction</label>
-                        <input type="submit" id="add-transaction__submit" className="button" value="Add"/>
-                    </form>
-                    {/* <p>User entered: {this.state.userString}</p>
-                    <p>Detected date: {moment(this.state.detectedDate, 'YYYY-MM-DD').format('MMMM D, YYYY')}</p>
-                    <p>Detected amount: ${this.state.detectedAmount}</p>
-                    <p>Detected category: #{this.state.detectedCategory}</p>
-                    <p>Detected description: {this.state.detectedDescription}</p> */}
-                </div>
-            </section>
+            <React.Fragment>
+                <PreviewTransaction showPreview={showPreview} date={this.state.detectedDate} amount={this.state.detectedAmount} description={this.state.detectedDescription} category={this.state.detectedCategory} />
+                <section className="add-transaction">
+                    <div className="wrapper">
+                        <form className="add-transaction__form" onSubmit={this.handleSubmit}>
+                            <label htmlFor="add-transaction__input" className="visuallyhidden">Enter transaction details</label>
+                            <input type="text" id="add-transaction__input" onChange={this.handleChange} value={this.state.userString} placeholder="Enter an expense, e.g. jan12 Apples and oranges 5.85 #groceries" autoComplete="off"/>
+                            <label htmlFor="add-transaction__submit" className="visuallyhidden">Add transaction</label>
+                            <input type="submit" id="add-transaction__submit" className="button" value="Add" />
+                        </form>
+                        {/* <p>User entered: {this.state.userString}</p>
+                        <p>Detected date: {moment(this.state.detectedDate, 'YYYY-MM-DD').format('MMMM D, YYYY')}</p>
+                        <p>Detected amount: ${this.state.detectedAmount}</p>
+                        <p>Detected category: #{this.state.detectedCategory}</p>
+                        <p>Detected description: {this.state.detectedDescription}</p> */}
+                    </div>
+                </section>
+            </React.Fragment>
         )
     }
 }
