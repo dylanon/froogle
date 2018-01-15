@@ -23,7 +23,7 @@
 
     &__item-column {
         margin: 0 6px;
-        word-break: break-all;
+        overflow-wrap: break-word;
     }
 
     &__item-date {
@@ -40,5 +40,49 @@
 
     &__item-category {
         width: 35%;
+    }
+
+    @media (max-width: 540px) {
+        &__item {
+            flex-wrap: wrap;
+        }
+
+        &__item-column {
+            flex-grow: 1;
+            margin: 0;
+        }
+
+        &__item-date {
+            width: 30%
+        }
+    
+        &__item-description {
+            width: 60%;
+        }
+        
+        &__item-amount {
+            width: 30%;
+        }
+    
+        &__item-category {
+            width: 30%;
+        }
+
+        &__item-delete {
+            width: 30%;
+            text-align: right;
+        }
+    }
+
+    @media (max-width: 400px) {
+        &__item {
+            flex-flow: column nowrap;
+        }
+
+        &__item-column {
+            width: 100%;
+            text-align: center;
+            margin: 0.2em 0;
+        }
     }
 }

@@ -39,26 +39,53 @@ a {
     flex: 1 1 auto; // Grow to full width
     display: flex;
     flex-flow: row nowrap;
+
+    @media (max-width: 734px) {
+        flex-direction: column;
+    }
 }
 
 .sidebar {
     width: 30%;
-    padding: 24px 48px 24px 0;
+    padding: 24px 8px 24px 0;
     background: #fafafa;
 
     h2 {
         font-size: 2.4rem;
         margin: 0.83em 0;
     }
+
+    @media (max-width: 943px) {
+        width: 20%;
+
+        h2 {
+            font-size: 1.8rem;
+        }
+    }
+
+    @media (max-width: 734px) {
+        width: 100%;
+        padding: 0;
+    }
 }
 
 .main {
     width: 70%;
     border: 1px solid rgba(0, 0, 0, 0.144);
-    border-top: 0;
-    border-bottom: 0;
+    border-top-width: 0;
     padding: 24px 48px;
     background: white;
+    margin-bottom: 100px;
+
+    @media (max-width: 943px) {
+        width: 80%;
+    }
+
+    @media (max-width: 734px) {
+        width: 100%;
+        border: 0;
+        padding: 24px 12px;
+    }
 }
 
 .input-field {

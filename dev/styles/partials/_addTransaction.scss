@@ -13,9 +13,27 @@
     display: flex;
     flex-flow: row nowrap;
     justify-content: flex-end;
+
+    @media (max-width: 943px) {
+        justify-content: center;
+    }
 }
 
 #add-transaction__input {
     @extend .input-field;
     width: 55%;
+
+    @media (max-width: 943px) {
+        width: 75%;
+    }
+
+    @media (max-width: 734px) {
+        width: 100%;
+    }
+}
+
+#add-transaction__submit {
+    @media (max-width: 943px) {
+        margin-right: 0;
+    }
 }

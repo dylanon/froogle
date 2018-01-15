@@ -1,11 +1,25 @@
 .categories-list {
     padding: 0;
     list-style-type: none;
-    margin-top: 3.6rem;
+    margin-top: 0.4444em;
 
     &__item {
         font-size: 2rem;
-        margin: 1.2rem 0 1.2rem 2.4rem;
+        margin: 0.6em 0 0.6rem 1.2em;
         word-break: break-all;
+    }
+
+    @media (max-width: 943px) {
+        &__item {
+            font-size: 1.6rem;
+            margin-left: 0;
+        }
+    }
+
+    @media (max-width: 734px) {
+        &__item {
+            display: inline-block;
+            margin: 0.4em 1em;
+        }
     }
 }
