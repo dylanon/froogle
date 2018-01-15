@@ -8,4 +8,7 @@
     @include logoFont;
     text-transform: lowercase;
     margin: 0.3em 0;
+    color: white;
+    text-shadow: 3px 3px 0px darken($secondary, 10%);
+    display: inline-block;
 }
