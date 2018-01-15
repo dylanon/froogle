@@ -15,7 +15,7 @@ export default class CategoryBudget extends React.Component {
                     return total;
                 }
             }, 0);
-            budgetContent = <p>Total budgeted: ${monthlyBudget}</p>
+            budgetContent = <p>Total budgeted: ${monthlyBudget.toFixed(2)}</p>
         } else if (Number(currentCategoryObject.budget) > 0) {
             // If in a category && budget set to over 0, show the budget
             budgetContent = (
