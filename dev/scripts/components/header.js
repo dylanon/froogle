@@ -1,4 +1,5 @@
 import React from 'react';
+import AuthenticationControls from './authenticationControls.js';
 
 export default class Header extends React.Component {
     openModal(e) {
@@ -18,9 +19,10 @@ export default class Header extends React.Component {
             <header className="header">
                 <div className="wrapper header-content">
                     <h1 className="logo">Froogle</h1>
-                    <a href="#" onClick={this.openModal} className="about-this-page"><i className="fas fa-info-circle" title="About this page"></i></a>
+                    {/* <a href="#" onClick={this.openModal} className="about-this-page"><i className="fas fa-info-circle" title="About this page"></i></a> */}
+                    <AuthenticationControls />
                 </div>
-                <div className="about-modal">
+                {/* <div className="about-modal">
                     <a href="#" className="about-modal__close" onClick={this.closeModal}>Close</a>
                     <h2>Froogle is currently in alpha.</h2>
                     <p>Please don't store critical information here - You may lose access.</p>
@@ -33,7 +35,7 @@ export default class Header extends React.Component {
                     <p>
                         Built with <i className="fas fa-heart" title="Love"></i> by <a href="http://dylanon.com">Dylan On</a>.
                     </p>
-                </div>
+                </div> */}
             </header>
         )
     }

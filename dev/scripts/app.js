@@ -27,6 +27,7 @@ class App extends React.Component {
       firebase.auth().onAuthStateChanged(user => {
         if (user) {
           console.log('User is signed in!');
+          console.log('onAuthStateChanged User:', user);
           // Store user id in state
           this.setState({
             uid: user.uid
@@ -34,7 +35,6 @@ class App extends React.Component {
           // Download data and listen for changes
           this.listenForData();
         } else {
-          console.log('Not signed in.');
           this.signInAnonymously();
         }
       });
