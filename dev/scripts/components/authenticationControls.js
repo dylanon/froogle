@@ -41,9 +41,10 @@ export default class AuthenticationControls extends React.Component {
     render() {
         return (
             <ul className="authentication-controls">
-                <li><a href="#" onClick={this.linkAccountWithGoogle}>Save Data with Google</a></li>
-                <li><a href="#" onClick={this.signInWithGoogle}>Sign In</a></li>
-                <li><a href="#" onClick={this.signOut}>Sign Out</a></li>
+                <li className="button--authentication"><a href="#" onClick={this.linkAccountWithGoogle}>Save Data with Google</a></li>
+                <li>or</li>
+                <li className="button--authentication"><a href="#" onClick={this.signInWithGoogle}>Sign In</a></li>
+                <li className="button--authentication"><a href="#" onClick={this.signOut}>Sign Out</a></li>
             </ul>
         )
     }

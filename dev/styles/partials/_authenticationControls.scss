@@ -1,0 +1,15 @@
+.authentication-controls {
+    li {
+        display: inline-block;
+        margin-left: 1em;
+    }
+}
+
+.button--authentication {
+    @extend .button;
+    margin: 0;
+    
+    a {
+        color: white;
+    }
+}
