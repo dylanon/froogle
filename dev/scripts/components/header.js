@@ -20,7 +20,7 @@ export default class Header extends React.Component {
                 <div className="wrapper header-content">
                     <h1 className="logo">Froogle</h1>
                     {/* <a href="#" onClick={this.openModal} className="about-this-page"><i className="fas fa-info-circle" title="About this page"></i></a> */}
-                    <AuthenticationControls />
+                    <AuthenticationControls isAnonymous={this.props.isAnonymous} updateUser={this.props.updateUser} />
                 </div>
                 {/* <div className="about-modal">
                     <a href="#" className="about-modal__close" onClick={this.closeModal}>Close</a>

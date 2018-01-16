@@ -14,12 +14,14 @@ class App extends React.Component {
       super(props);
       this.state = {
         uid: '',
+        isAnonymous: true,
         transactions: [],
         categories: [],
         filterCategory: ''
       }
       this.listenForData = this.listenForData.bind(this);
       this.filterTransactionsByCategory = this.filterTransactionsByCategory.bind(this);
+      this.updateUser = this.updateUser.bind(this);
     }
 
     componentDidMount() {
@@ -30,13 +32,24 @@ class App extends React.Component {
           console.log('onAuthStateChanged User:', user);
           // Store user id in state
           this.setState({
-            uid: user.uid
+            uid: user.uid,
+            isAnonymous: user.isAnonymous
           });
           // Download data and listen for changes
           this.listenForData();
         } else {
           this.signInAnonymously();
         }
+      });
+    }
+
+    updateUser() {
+      // Updates the user when transitioning from anonymous auth to Google auth
+      // During that transition, onAuthStateChanged does not fire, so call this function to update the state
+      const user = firebase.auth().currentUser;
+      this.setState({
+        uid: user.uid,
+        isAnonymous: user.isAnonymous
       });
     }
 
@@ -123,7 +136,7 @@ class App extends React.Component {
 
       return (
         <React.Fragment>
-          <Header />
+          <Header isAnonymous={this.state.isAnonymous} updateUser={this.updateUser} />
           <div className="container">
             <div className="wrapper container-content">
               <aside className="sidebar">
