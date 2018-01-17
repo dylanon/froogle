@@ -9,6 +9,11 @@
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
+
+    @media (max-width: 525px) {
+        // Stack logo and authentication controls vertically
+        flex-flow: column nowrap;
+    }
 }
 
 .logo {

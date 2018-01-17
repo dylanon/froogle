@@ -1,7 +1,34 @@
 .authentication-controls {
     li {
         display: inline-block;
+        text-align: center;
         margin-left: 1em;
+    }
+
+    @media (max-width: 525px) {
+        // Authentication controls appear on one line, under logo
+        margin-top: 0;
+        padding-left: 0;
+
+        li {
+            margin-left: 0;
+
+            // Add some space around the 'or' item
+            &:nth-child(2) {
+                margin: 0 0.5em;
+            }
+        }
+    }
+
+    @media (max-width: 350px) {
+        li {
+            display: block;
+
+            // Add some space around the 'or' item
+            &:nth-child(2) {
+                margin: 0.25em;
+            }
+        }
     }
 }
 
